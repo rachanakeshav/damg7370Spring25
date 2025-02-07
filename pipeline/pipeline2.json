@@ -65,13 +65,11 @@
 							},
 							{
 								"source": {
-									"name": "Animals_Name",
-									"type": "String",
+									"name": "Animal_Name",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "Animals_Name",
-									"type": "String",
+									"name": "Animal_Name",
 									"physicalType": "UTF8"
 								}
 							},
@@ -180,10 +178,6 @@
 									"value": "@utcNow()",
 									"type": "Expression"
 								}
-							},
-							{
-								"name": "",
-								"value": ""
 							}
 						],
 						"storeSettings": {

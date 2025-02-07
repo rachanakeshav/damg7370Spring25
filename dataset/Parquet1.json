@@ -5,12 +5,21 @@
 			"referenceName": "AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"filename": {
+				"type": "string",
+				"defaultValue": "Seattle_Pet_Licenses_20250114.parquet"
+			}
+		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Seattle_Pet_Licenses_20250114.parquet",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
 				"fileSystem": "silver"
 			},
 			"compressionCodec": "snappy"

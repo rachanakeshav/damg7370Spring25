@@ -54,10 +54,7 @@
 				"outputs": [
 					{
 						"referenceName": "Parquet1",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": "Seattle_Pet_Licenses_20250114.parquet"
-						}
+						"type": "DatasetReference"
 					}
 				]
 			},
@@ -73,8 +70,8 @@
 					}
 				],
 				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
+					"timeout": "0.00:30:00",
+					"retry": 1,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
 					"secureInput": false
@@ -114,21 +111,12 @@
 							"type": "SnowflakeImportCopyCommand"
 						}
 					},
-					"enableStaging": true,
-					"stagingSettings": {
-						"linkedServiceName": {
-							"referenceName": "AzureBlobStorage_LS",
-							"type": "LinkedServiceReference"
-						}
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
 						"referenceName": "Parquet1",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": "Seattle_Pet_Licenses_20250114.parquet"
-						}
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [

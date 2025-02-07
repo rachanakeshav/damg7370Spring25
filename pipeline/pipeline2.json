@@ -227,8 +227,7 @@
 							},
 							{
 								"source": {
-									"name": "Animals_Name",
-									"type": "String"
+									"name": "Animal_Name"
 								},
 								"sink": {
 									"name": "ANIMAL_NAME",

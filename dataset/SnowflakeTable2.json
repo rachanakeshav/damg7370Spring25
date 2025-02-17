@@ -37,11 +37,11 @@
 				"type": "VARCHAR"
 			},
 			{
-				"name": "JOB_ID",
+				"name": "DI_JOB_ID",
 				"type": "VARCHAR"
 			},
 			{
-				"name": "JOB_LOAD_DATE",
+				"name": "DI_LOAD_DATE",
 				"type": "DATE"
 			}
 		],

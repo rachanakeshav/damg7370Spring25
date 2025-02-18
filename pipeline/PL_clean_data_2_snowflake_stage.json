@@ -1,0 +1,149 @@
+{
+	"name": "PL_clean_data_2_snowflake_stage",
+	"properties": {
+		"activities": [
+			{
+				"name": "CleanPetLIcData",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "df_clean_data_from_tsv",
+						"type": "DataFlowReference",
+						"parameters": {
+							"Job_ID": {
+								"value": "'@{pipeline().RunId}'",
+								"type": "Expression"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "LoadBreedDim",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "CleanPetLIcData",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "df_Load_Breed_Dim",
+						"type": "DataFlowReference",
+						"parameters": {
+							"DI_JOB_ID": {
+								"value": "'@{substring(pipeline().RunId,1,10)}'",
+								"type": "Expression"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "LoadLocationDim",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "LoadBreedDim",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "df_Load_Location_Dim",
+						"type": "DataFlowReference",
+						"parameters": {
+							"JOB_ID": {
+								"value": "'@{substring(pipeline().RunId,1,10)}'",
+								"type": "Expression"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "LoadToFact",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "LoadLocationDim",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "df_Fact_Load",
+						"type": "DataFlowReference",
+						"parameters": {
+							"JOB_ID": {
+								"value": "'@{substring(pipeline().RunId,1,10)}'",
+								"type": "Expression"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": []
+	}
+}

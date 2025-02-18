@@ -6,21 +6,21 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "SnowflakeTable5",
+						"referenceName": "SnowflakeTableSeattlePetLic",
 						"type": "DatasetReference"
 					},
 					"name": "sourcestg"
 				},
 				{
 					"dataset": {
-						"referenceName": "SnowflakeTable6",
+						"referenceName": "SnowflakeTableBreedDim",
 						"type": "DatasetReference"
 					},
 					"name": "BreedDimMaxID"
 				},
 				{
 					"dataset": {
-						"referenceName": "SnowflakeTable6",
+						"referenceName": "SnowflakeTableBreedDim",
 						"type": "DatasetReference"
 					},
 					"name": "BreedDim"
@@ -29,7 +29,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "SnowflakeTable6",
+						"referenceName": "SnowflakeTableBreedDim",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"

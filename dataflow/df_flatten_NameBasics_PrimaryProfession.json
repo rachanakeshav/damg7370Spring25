@@ -27,9 +27,15 @@
 				},
 				{
 					"name": "flatten"
+				},
+				{
+					"name": "derivedColumn2"
 				}
 			],
 			"scriptLines": [
+				"parameters{",
+				"     Job_ID_Profession as string (\"10\")",
+				"}",
 				"source(output(",
 				"          NCONST as string,",
 				"          PRIMARYNAME as string,",
@@ -49,11 +55,15 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten",
-				"flatten sink(allowSchemaDrift: true,",
+				"flatten derive(DI_JOB_ID = uuid(),",
+				"          DI_LOAD_DT = currentTimestamp()) ~> derivedColumn2",
+				"derivedColumn2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          NCONST as string,",
-				"          PRIMARYPROFESSION as string",
+				"          PRIMARYPROFESSION as string,",
+				"          DI_JOB_ID as string,",
+				"          DI_LOAD_DT as date",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -62,7 +72,13 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     stageInsert: true) ~> sink2PrimaryProfession"
+				"     stageInsert: true,",
+				"     mapColumn(",
+				"          NCONST,",
+				"          PRIMARYPROFESSION,",
+				"          DI_JOB_ID,",
+				"          DI_LOAD_DT",
+				"     )) ~> sink2PrimaryProfession"
 			]
 		}
 	}

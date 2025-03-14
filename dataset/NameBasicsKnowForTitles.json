@@ -19,7 +19,7 @@
 		],
 		"typeProperties": {
 			"schema": "IMDB_SF",
-			"table": "NAME_BASICS_KNOWN_TITLES_SF"
+			"table": "NAME_BASICS_KNOWN_TITLES_ADF"
 		}
 	}
 }

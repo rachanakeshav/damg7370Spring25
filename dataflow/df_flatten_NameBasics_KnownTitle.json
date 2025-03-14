@@ -1,0 +1,69 @@
+{
+	"name": "df_flatten_NameBasics_KnownTitle",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "NameBasicsTable",
+						"type": "DatasetReference"
+					},
+					"name": "NameBasics"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "NameBasicsKnowForTitles",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "flatten"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          NCONST as string,",
+				"          PRIMARYNAME as string,",
+				"          BIRTHYEAR as decimal(4,0),",
+				"          DEATHYEAR as decimal(4,0),",
+				"          PRIMARYPROFESSION as string,",
+				"          KNOWNFORTITLES as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> NameBasics",
+				"NameBasics derive(KNOWNFORTITLES = split(KNOWNFORTITLES, ',')) ~> derivedColumn1",
+				"derivedColumn1 foldDown(unroll(KNOWNFORTITLES),",
+				"     mapColumn(",
+				"          NCONST,",
+				"          KNOWNFORTITLES",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten",
+				"flatten sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          NCONST as string,",
+				"          KNOWNFORTITLES as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     stageInsert: true) ~> sink1"
+			]
+		}
+	}
+}

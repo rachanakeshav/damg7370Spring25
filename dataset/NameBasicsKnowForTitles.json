@@ -1,0 +1,25 @@
+{
+	"name": "NameBasicsKnowForTitles",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflake_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "NCONST",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "KNOWNFORTITLES",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "IMDB_SF",
+			"table": "NAME_BASICS_KNOWN_TITLES_SF"
+		}
+	}
+}

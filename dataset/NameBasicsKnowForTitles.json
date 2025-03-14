@@ -15,6 +15,14 @@
 			{
 				"name": "KNOWNFORTITLES",
 				"type": "VARCHAR"
+			},
+			{
+				"name": "DI_JOB_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "DI_LOAD_DT",
+				"type": "DATE"
 			}
 		],
 		"typeProperties": {

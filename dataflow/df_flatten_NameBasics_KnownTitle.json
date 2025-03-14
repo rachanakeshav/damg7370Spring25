@@ -18,7 +18,7 @@
 						"referenceName": "NameBasicsKnowForTitles",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "sink2KnownForTitles"
 				}
 			],
 			"transformations": [
@@ -62,7 +62,7 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     stageInsert: true) ~> sink1"
+				"     stageInsert: true) ~> sink2KnownForTitles"
 			]
 		}
 	}

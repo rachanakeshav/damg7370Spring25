@@ -1,0 +1,25 @@
+{
+	"name": "triggerFlattenPL",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_flatten_NameBasics",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 15,
+				"startTime": "2025-03-14T02:58:00",
+				"endTime": "2025-03-15T02:58:00",
+				"timeZone": "Eastern Standard Time"
+			}
+		}
+	}
+}
